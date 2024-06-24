@@ -44,7 +44,7 @@ async def zed_alive(event):
     else:
         zedda = f"{bt.year}/{bt.month}/{bt.day}"
     Z_EMOJI = gvarstatus("ALIVE_EMOJI") or "✥┊"
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "** بـوت  زدثــون 𝗭𝗧𝗵𝗼𝗻  يعمـل .. بنجـاح ☑️ 𓆩 **"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "** بـوت  ماتركس 𝙈𝙖𝙏𝙍𝙞𝙭 ⌁  يعمـل .. بنجـاح ☑️ 𓆩 **"
     ZED_IMG = gvarstatus("ALIVE_PIC")
     USERID = zedub.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
     ALIVE_NAME = gvarstatus("ALIVE_NAME") if gvarstatus("ALIVE_NAME") else "-"
@@ -95,7 +95,7 @@ zed_temp = """{ALIVE_TEXT}
 **{Z_EMOJI} تاريـخ التنصيب :** `{zzd}`
 **{Z_EMOJI} وقت التنصيب :** `{zzt}`
 **{Z_EMOJI} المسـتخـدم:** {mention}
-**{Z_EMOJI} قنـاة السـورس :** [اضغـط هنـا](https://t.me/ZThon)"""
+**{Z_EMOJI} قنـاة السـورس :** [اضغـط هنـا](https://t.me/veevvw)"""
 
 
 @zedub.zed_cmd(
@@ -115,9 +115,9 @@ async def z_alive(event):
     USERID = zedub.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
     ALIVE_NAME = gvarstatus("ALIVE_NAME") if gvarstatus("ALIVE_NAME") else "-"
     mention = f"[{ALIVE_NAME}](tg://user?id={USERID})"
-    zed_caption = "** بـوت  زدثــون 𝗭𝗧𝗵𝗼𝗻  يعمـل .. بنجـاح ☑️ 𓆩 **\n"
+    zed_caption = "** بـوت  ماتركس 𝙈𝙖𝙏𝙍𝙞𝙭 ⌁  يعمـل .. بنجـاح ☑️ 𓆩 **\n"
     zed_caption += f"**{Z_EMOJI} إصـدار التـيليثون :** `{version.__version__}\n`"
-    zed_caption += f"**{Z_EMOJI} إصـدار زدثــون :** `{zedversion}`\n"
+    zed_caption += f"**{Z_EMOJI} إصـدار ماتركس :** `{zedversion}`\n"
     zed_caption += f"**{Z_EMOJI} إصـدار البـايثون :** `{python_version()}\n`"
     zed_caption += f"**{Z_EMOJI} المسـتخدم :** {mention}\n"
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, zed_caption)
