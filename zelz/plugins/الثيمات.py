@@ -1,10 +1,3 @@
-# Zed-Thon - ZelZal
-# Copyright (C) 2022 Zedthon . All Rights Reserved
-#
-# This file is a part of < https://github.com/Zed-Thon/ZelZal/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/Zed-Thon/ZelZal/blob/main/LICENSE/>.
-#حقوق زد ثـون ومتعوب عليها .. تخمط اذكر المصدر لو اهينك
 
 import random
 
@@ -12,7 +5,7 @@ from . import zedub
 from ..core.managers import edit_or_reply
 from ..helpers.utils import reply_id as rd 
 from ..helpers import get_user_from_event
-from zedthon.malath.theem import *
+from BiLaL.malath.theem import *
 
 from . import *
 
