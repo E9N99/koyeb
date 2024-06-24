@@ -13,19 +13,19 @@ from .helpers.utils.utils import runasync
 from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "3.3.3"
-__license__ = "حقـوق سـورس زدثــون"
-__author__ = "زدثــون <https://T.me/ZThon>"
+__license__ = "حقـوق سـورس ماتركـس"
+__author__ = "زدثــون <https://T.me/veevvw>"
 __copyright__ = "ZThon Source (C) 2020 - 2024  " + __author__
 
 zedub.version = __version__
-LOGS = logging.getLogger("زدثــون")
+LOGS = logging.getLogger("ماتركس")
 bot = zedub
 
 StartTime = time.time()
 zedversion = "3.3.3"
 
 if Config.UPSTREAM_REPO == "zel":
-    UPSTREAM_REPO_URL = "https://github.com/ZThon-Ar/ZTZ"
+    UPSTREAM_REPO_URL = "https://github.com/E9N99/KOYEB"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 
