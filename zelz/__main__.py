@@ -21,7 +21,7 @@ if gvarstatus("ALIVE_NAME") is None: #Code by T.me/zzzzl1l
         LOGS.error(f"- The AutoName {e}")
 
 try:
-    LOGS.info("⌭ بـدء تنزيـل زدثــون ⌭")
+    LOGS.info("⌭ بـدء تنزيـل ماتركس ⌭")
     zedub.loop.run_until_complete(setup_bot())
     LOGS.info("✓ تـم تنزيـل زدثــون .. بـنجـاح ✓")
 except Exception as e:
@@ -52,7 +52,7 @@ async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
     await load_plugins("assistant")
-    LOGS.info(f"⌔ تـم تنصيـب زدثــون . . بنجـاح ✓ \n⌔ لـ إظهـار الاوامـر ارسـل (.الاوامر)")
+    LOGS.info(f"⌔ تـم تنصيـب ماتركـس . . بنجـاح ✓ \n⌔ لـ إظهـار الاوامـر ارسـل (.الاوامر)")
     await verifyLoggerGroup()
     await add_bot_to_logger_group(BOTLOG_CHATID)
     if PM_LOGGER_GROUP_ID != -100:
