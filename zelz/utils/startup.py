@@ -162,7 +162,7 @@ async def mybot():
             await asyncio.sleep(1)
             await bot.send_message("@BotFather", botname)
             await asyncio.sleep(1)
-            await bot.send_file("@BotFather", "zelz/Matrix/logozed.jpg")
+            await bot.send_file("@BotFather", "zelz/Matrix/logosed.jpg")
             await asyncio.sleep(3)
             await bot.send_message("@BotFather", "/setabouttext")
             await asyncio.sleep(1)
