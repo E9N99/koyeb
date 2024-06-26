@@ -23,6 +23,7 @@ from ..helpers.utils import reply_id
 from ..sql_helper.globals import gvarstatus
 
 plugin_category = "utils"
+STATS = gvarstatus("Z_STATS") or "فحص"
 
 #كتـابة وتعـديل:  @SedUb
 file_path = "installation_date.txt"
@@ -34,7 +35,7 @@ else:
     with open(file_path, "w") as file:
         file.write(installation_time)
 
-@zedub.zed_cmd(pattern="فحص(?:\s|$)([\s\S]*)")
+@zedub.zed_cmd(pattern=f"{STATS}$")
 async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
