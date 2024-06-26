@@ -14,7 +14,7 @@ from ..helpers.tools import media_type
 from ..helpers.utils import _zedtools, _zedutils, _format, install_pip, reply_id
 from .decorators import admin_cmd, sudo_cmd
 
-LOGS = logging.getLogger("Zelzal")
+LOGS = logging.getLogger("BiLaL")
 inst_done = "✅ تـم تنصيب سـورس ماتركس .. بنجـاح ⌔\n💡 ثم ارسـل الامـر ( .مساعده ) ⌔\n♥️ قم بالذهاب الى تيليجـرام الان ⌔"
 
 def load_module(shortname, plugin_path=None):
