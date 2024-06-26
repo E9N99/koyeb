@@ -1,1 +1,1 @@
-from .zedub_config import Config
+from .Matrix_config import Config
