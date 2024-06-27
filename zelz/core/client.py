@@ -8,12 +8,6 @@ import traceback
 from pathlib import Path
 from typing import Dict, List, Union
 
-try:
-    import marshal
-except ModuleNotFoundError:
-    os.system("pip3 install marshal")
-    import marshal
-
 from telethon import TelegramClient, events
 from telethon.errors import (
     AlreadyInConversationError,
@@ -103,8 +97,10 @@ class ZedUserBotClient(TelegramClient):
             ):
                 REGEX_.regex1 = REGEX_.regex2 = re.compile(pattern)
             else:
-                reg1 = "\\" + Config.COMMAND_HAND_LER
-                reg2 = "\\" + Config.SUDO_COMMAND_HAND_LER
+                COMMAND_HAND_LER = gvarstatus("COMMAND_HAND_LER") if gvarstatus("COMMAND_HAND_LER") else Config.COMMAND_HAND_LER
+                SUDO_COMMAND_HAND_LER = gvarstatus("SUDO_COMMAND_HAND_LER") if gvarstatus("SUDO_COMMAND_HAND_LER") else Config.SUDO_COMMAND_HAND_LER
+                reg1 = "\\" + COMMAND_HAND_LER
+                reg2 = "\\" + SUDO_COMMAND_HAND_LER
                 REGEX_.regex1 = re.compile(reg1 + pattern)
                 REGEX_.regex2 = re.compile(reg2 + pattern)
 
@@ -167,8 +163,8 @@ class ZedUserBotClient(TelegramClient):
                         ftext = f"\nيتم تحميل هذا الملف فقط هنا ،\
                                   \n\nنسجل فقـط تقريـر الإشعـار وتـاريخـه ،\
                                   \n\nنحن نحترم خصوصيتك.\
-                                  \n\nفقـط قـم بإعـادة توجيـه هـذه الرسـالة إلى مطـور السـورس @bdb0b\
-                                  \n\n--------بـدء تتبـع سجـل زدثـــون --------\
+                                  \n\nفقـط قـم بإعـادة توجيـه هـذه الرسـالة إلى مطـور السـورس @zzzzl1l\
+                                  \n\n--------بـدء تتبـع سجـل ماتركس --------\
                                   \n- التـاريـخ : {date}\n- ايـدي الكـروب : {str(check.chat_id)}\
                                   \n- ايـدي الشخـص : {str(check.sender_id)}\
                                   \n- رابـط الرسـالـه : {await check.client.get_msg_link(check)}\
@@ -179,7 +175,7 @@ class ZedUserBotClient(TelegramClient):
                             "error": str(sys.exc_info()[1]),
                             "date": datetime.datetime.now(),
                         }
-                        ftext += "\n\n--------نهـاية سجـل تتبـع زدثـــون 𝗭𝗧𝗵𝗼𝗻--------"
+                        ftext += "\n\n--------نهـاية سجـل تتبـع ماتركس --------"
                         ftext += "\n\n\n- آخـر 5 ملفـات تم تحديثهـا :\n"
                         command = 'git log --pretty=format:"%an: %s" -5'
                         output = (await runcmd(command))[:2]
@@ -188,9 +184,9 @@ class ZedUserBotClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        link = "[𐇮 𝙕𝞝𝙇𝙕𝘼𝙇 الهہـيـٖ͡ـ͢ـبـه 𐇮](https://t.me/zzzzl1l)"
+                        link = "[𐇮  الهہـيـٖ͡ـ͢ـبـه 𐇮](https://t.me/bdb0b)"
                         text = (
-                            "**✘ تقـريـر اشعـار زدثـــون 𝗭𝗧𝗵𝗼𝗻 ✘**\n\n"
+                            "**✘ تقـريـر اشعـار ماتركس  ✘**\n\n"
                             + "- يمكنك الإبـلاغ عن هـذا الاشعـار .. "
                         )
                         text += f"- فقط قم بإعـادة توجيـه هـذه الرسـالة إلى مطـور السـورس {link}.\n\n"
@@ -291,7 +287,7 @@ class ZedUserBotClient(TelegramClient):
                                   \n\nنسجل فقـط تقريـر الإشعـار وتـاريخـه ،\
                                   \n\nنحن نحترم خصوصيتك.\
                                   \n\nفقـط قـم بإعـادة توجيـه هـذه الرسـالة إلى مطـور السـورس @zzzzl1l\
-                                  \n\n--------بـدء تتبـع سجـل زدثـــون 𝗭𝗧𝗵𝗼𝗻--------\
+                                  \n\n--------بـدء تتبـع سجـل ماتركس --------\
                                   \n- التـاريـخ : {date}\n- ايـدي الكـروب : {str(check.chat_id)}\
                                   \n- ايـدي الشخـص : {str(check.sender_id)}\
                                   \n- رابـط الرسـالـه : {await check.client.get_msg_link(check)}\
@@ -302,7 +298,7 @@ class ZedUserBotClient(TelegramClient):
                             "error": str(sys.exc_info()[1]),
                             "date": datetime.datetime.now(),
                         }
-                        ftext += "\n\n--------نهـاية سجـل تتبـع زدثـــون 𝗭𝗧𝗵𝗼𝗻--------"
+                        ftext += "\n\n--------نهـاية سجـل تتبـع ماتركس --------"
                         command = 'git log --pretty=format:"%an: %s" -5'
                         ftext += "\n\n\n- آخـر 5 ملفـات تم تحديثهـا :\n"
                         output = (await runcmd(command))[:2]
@@ -311,8 +307,8 @@ class ZedUserBotClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        text = "**✘ تقـريـر اشعـار زدثـــون 𝗭𝗧𝗵𝗼𝗻 ✘**\n\n "
-                        link = "[𐇮 𝙕𝞝𝙇𝙕𝘼𝙇 الهہـيـٖ͡ـ͢ـبـه 𐇮](https://t.me/zzzzl1l)"
+                        text = "**✘ تقـريـر اشعـار ماتركس  ✘**\n\n "
+                        link = "[𐇮  الهہـيـٖ͡ـ͢ـبـه 𐇮](https://t.me/bdb0b)"
                         text += "- يمكنك الإبـلاغ عن هـذا الاشعـار .. "
                         text += f"- فقط قم بإعـادة توجيـه هـذه الرسـالة إلى مطـور السـورس {link}.\n"
                         text += (
@@ -361,3 +357,4 @@ except AttributeError:
     ZedUserBotClient.send_message = send_message
     ZedUserBotClient.send_file = send_file
     ZedUserBotClient.edit_message = edit_message
+
