@@ -58,7 +58,7 @@ bot = zedub
 DEV = 1895219306
 
 
-async def autovars(): #Code by T.me/zzzzl1l
+async def autovars(): 
     if "ENV" in heroku_var and "TZ" in heroku_var:
         return
     if "ENV" in heroku_var and "TZ" not in heroku_var:
@@ -129,8 +129,11 @@ async def setup_bot():
         if Config.OWNER_ID == 0:
             Config.OWNER_ID = utils.get_peer_id(zedub.me)
     except Exception as e:
-        LOGS.error(f"كـود تيرمكس - {str(e)}")
-        sys.exit()
+        if "was used under two different IP addresses" in str(e):
+            pass
+        else:
+            LOGS.error(f"كـود تيرمكس - {str(e)}")
+            sys.exit()
 
 
 async def mybot(): 
@@ -150,7 +153,7 @@ async def mybot():
             await asyncio.sleep(1)
             await bot.send_message("@BotFather", botname)
             await asyncio.sleep(1)
-            await bot.send_message("@BotFather", "𝙈𝙖𝙏𝙍𝙞𝙭 ⌁")
+            await bot.send_message("@BotFather", "Matrix")
             await asyncio.sleep(3)
             await bot.send_message("@BotFather", "/setname")
             await asyncio.sleep(1)
@@ -174,7 +177,7 @@ async def mybot():
             await asyncio.sleep(1)
             await bot.send_message("@BotFather", botname)
             await asyncio.sleep(1)
-            await bot.send_message("@BotFather", f"•⎆┊انـا البــوت المسـاعـد الخــاص بـ {zel_zal} \n•⎆┊بـواسطـتـي يمكـنك التواصــل مـع مـالكـي 🧸♥️\n•⎆┊قنـاة السـورس 🌐 @ZThon 🌐")
+            await bot.send_message("@BotFather", f"•⎆┊انـا البــوت المسـاعـد الخــاص بـ {zel_zal} \n•⎆┊بـواسطـتـي يمكـنك التواصــل مـع مـالكـي 🧸♥️\n•⎆┊قنـاة السـورس 🌐 @veevvw 🌐")
         except Exception as e:
             print(e)
 
@@ -191,8 +194,8 @@ async def startupmessage():
         if BOTLOG:
             Config.ZEDUBLOGO = await zedub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/f821d27af168206b472ad.mp4",
-                caption="**•⎆┊تـم بـدء تشغـيل سـورس ماتركس الخاص بك .. بنجاح 🧸♥️**",
+                "https://graph.org/file/37d87a4cee466aff60c52.jpg",
+                caption="**•⎆┊تـم بـدء تشغـيل سـورس ماتركـس الخاص بك .. بنجاح 🧸♥️**",
                 buttons=[(Button.url("𝙕𝙏𝙝𝙤𝙣𓅛", "https://t.me/veevvw"),)],
             )
     except Exception as e:
