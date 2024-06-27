@@ -1,7 +1,4 @@
-#𝙕𝙏𝙝𝙤𝙣 ®
-# Port to ZThon
-# modified by @ZThon
-# Copyright (C) 2022.
+
 
 import asyncio
 import os
