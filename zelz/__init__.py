@@ -14,7 +14,7 @@ from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "3.3.3"
 __license__ = "حقـوق سـورس ماتركـس"
-__author__ = "زدثــون <https://T.me/veevvw>"
+__author__ = "ماتركـس <https://T.me/veevvw>"
 __copyright__ = "ZThon Source (C) 2020 - 2024  " + __author__
 
 zedub.version = __version__
