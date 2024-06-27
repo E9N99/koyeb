@@ -36,12 +36,13 @@ def admin_cmd(pattern=None, command=None, **args):  # sourcery no-metrics
             except BaseException:
                 CMD_LIST.update({file_test: [cmd]})
         else:
-            if len(Config.COMMAND_HAND_LER) == 2:
-                zedreg = "^" + Config.COMMAND_HAND_LER
-                reg = Config.COMMAND_HAND_LER[1]
-            elif len(Config.COMMAND_HAND_LER) == 1:
-                zedreg = "^\\" + Config.COMMAND_HAND_LER
-                reg = Config.COMMAND_HAND_LER
+            COMMAND_HAND_LER = gvarstatus("COMMAND_HAND_LER") if gvarstatus("COMMAND_HAND_LER") else Config.COMMAND_HAND_LER
+            if len(COMMAND_HAND_LER) == 2:
+                zedreg = "^" + COMMAND_HAND_LER
+                reg = COMMAND_HAND_LER[1]
+            elif len(COMMAND_HAND_LER) == 1:
+                zedreg = "^\\" + COMMAND_HAND_LER
+                reg = COMMAND_HAND_LER
             args["pattern"] = re.compile(zedreg + pattern)
             if command is not None:
                 cmd = reg + command
@@ -88,12 +89,13 @@ def sudo_cmd(pattern=None, command=None, **args):  # sourcery no-metrics
             except BaseException:
                 SUDO_LIST.update({file_test: [cmd]})
         else:
-            if len(Config.SUDO_COMMAND_HAND_LER) == 2:
-                zedreg = "^" + Config.SUDO_COMMAND_HAND_LER
-                reg = Config.SUDO_COMMAND_HAND_LER[1]
-            elif len(Config.SUDO_COMMAND_HAND_LER) == 1:
-                zedreg = "^\\" + Config.SUDO_COMMAND_HAND_LER
-                reg = Config.COMMAND_HAND_LER
+            SUDO_COMMAND_HAND_LER = gvarstatus("SUDO_COMMAND_HAND_LER") if gvarstatus("SUDO_COMMAND_HAND_LER") else Config.SUDO_COMMAND_HAND_LER
+            if len(SUDO_COMMAND_HAND_LER) == 2:
+                zedreg = "^" + SUDO_COMMAND_HAND_LER
+                reg = SUDO_COMMAND_HAND_LER[1]
+            elif len(SUDO_COMMAND_HAND_LER) == 1:
+                zedreg = "^\\" + SUDO_COMMAND_HAND_LER
+                reg = SUDO_COMMAND_HAND_LER
             args["pattern"] = re.compile(zedreg + pattern)
             if command is not None:
                 cmd = reg + command
@@ -137,7 +139,7 @@ def errors_handler(func):
             date = (datetime.datetime.now()).strftime("%m/%d/%Y, %H:%M:%S")
             ftext = f"\nيتم تحميل هذا الملف فقط هنا ،\
                                   \n\nنسجل فقـط تقريـر الخطـأ وتـاريخـه ،\
-                                  \n\nفقـط قـم بإعـادة توجيـه هـذه الرسـالة إلى مطـور السـورس @zzzzl1l\
+                                  \n\nفقـط قـم بإعـادة توجيـه هـذه الرسـالة إلى مطـور السـورس @bdb0b\
                                   \n\n-------- معلومات عن الخطـأ--------\
                                   \nالتاريخ: {date}\nايدي المجموعه: {str(check.chat_id)}\
                                   \nايدي المرسل: {str(check.sender_id)}\
@@ -157,7 +159,7 @@ def errors_handler(func):
             ftext += result
             pastelink = await paste_message(ftext)
             text = "**هنالك مشكله معينه لديك**\n\n"
-            link = "[𐇮 𝙕𝞝𝙇𝙕𝘼𝙇 الهہـيـٖ͡ـ͢ـبـه 𐇮](https://t.me/zzzzl1l)"
+            link = "[𐇮  الهہـيـٖ͡ـ͢ـبـه 𐇮](https://t.me/bdb0b)"
             text += "اذا اردت يمكنك التبليغ عن المشكله"
             text += f"- فقط قم بتوجيه الرسالة الى  {link}.\n"
             text += f"**التقرير عن الخطأ : ** [{new['error']}]({pastelink})"
