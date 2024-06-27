@@ -67,9 +67,9 @@ zedub.loop.run_until_complete(startup_process())
 
 if len(sys.argv) not in (1, 3, 4):
     with contextlib.suppress(ConnectionError):
-        zedub.run_until_disconnected()
+        zedub.disconnect()
 elif not ZTcheck.sucess:
     with contextlib.suppress(ConnectionError):
         zedub.run_until_disconnected()
 else:
-    zedub.disconnect()
+    zedub.run_until_disconnected()
