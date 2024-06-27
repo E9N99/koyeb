@@ -1,3 +1,4 @@
+import contextlib
 import sys, asyncio
 import zelz
 from zelz import BOTLOG_CHATID, HEROKU_APP, PM_LOGGER_GROUP_ID
@@ -9,10 +10,10 @@ from .utils import mybot, saves, autoname
 from .utils import add_bot_to_logger_group, load_plugins, setup_bot, startupmessage, verifyLoggerGroup
 from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
-LOGS = logging.getLogger("Zelzal")
+LOGS = logging.getLogger("BiLaL")
 cmdhr = Config.COMMAND_HAND_LER
 
-if gvarstatus("ALIVE_NAME") is None: #Code by T.me/zzzzl1l
+if gvarstatus("ALIVE_NAME") is None: 
     try:
         LOGS.info("⌭ بـدء إضافة الاسـم التلقـائـي ⌭")
         zedub.loop.run_until_complete(autoname())
@@ -21,9 +22,9 @@ if gvarstatus("ALIVE_NAME") is None: #Code by T.me/zzzzl1l
         LOGS.error(f"- The AutoName {e}")
 
 try:
-    LOGS.info("⌭ بـدء تنزيـل ماتركس ⌭")
+    LOGS.info("⌭ بـدء تنزيـل ماتركـس ⌭")
     zedub.loop.run_until_complete(setup_bot())
-    LOGS.info("✓ تـم تنزيـل زدثــون .. بـنجـاح ✓")
+    LOGS.info("✓ تـم تنزيـل ماتركـس .. بـنجـاح ✓")
 except Exception as e:
     LOGS.error(f"{str(e)}")
     sys.exit()
@@ -65,14 +66,10 @@ async def startup_process():
 zedub.loop.run_until_complete(startup_process())
 
 if len(sys.argv) not in (1, 3, 4):
-    zedub.disconnect()
+    with contextlib.suppress(ConnectionError):
+        zedub.run_until_disconnected()
 elif not ZTcheck.sucess:
-    try:
+    with contextlib.suppress(ConnectionError):
         zedub.run_until_disconnected()
-    except ConnectionError:
-        pass
 else:
-    try:
-        zedub.run_until_disconnected()
-    except ConnectionError:
-        pass
+    zedub.disconnect()
